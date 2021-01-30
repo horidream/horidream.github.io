@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/lib/main.css">
+    <style>
+      
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .title > button {
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <div v-if="localizationLoaded">
+        <div class="title">
+          <h2>{{ 'Privacy Policy'.translate() }}</h2>
+          <button @click="changeLanguage">{{ language.toUpperCase() }}</button>
+        </div>
+        <div  v-html="content.translate()"></div>
+      </div>
+    </div>
+    <script src="/lib/main.js"></script>
+    <script>
+      $cm("com.horidream.apps.ClipboardComposer.PrivacyPolicy", "#app", {
+        state: {
+          language: "en"
+        },
+        data() {
+          return {
+            content: "content"
+          };
+        },
+        methods: {
+          changeLanguage() {
+            let languages = this.supportedLanguages;
+            let idx = languages.indexOf(this.language);
+            idx = ++idx % languages.length;
+            this.language = languages[idx];
+          },
+        },
+        computed: {
+          localizationLoaded() {
+            return this.localization && this.localization.cn;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
