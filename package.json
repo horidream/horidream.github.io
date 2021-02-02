@@ -1,0 +1,11 @@
+{
+  "name": "horidream.github.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/horidream/horidream.github.io.git",
+  "author": "Baoli Zhai <horidream@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "deploy": "git commit -am \"update\" && git push"
+  }
+}
