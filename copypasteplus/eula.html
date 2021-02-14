@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EULA</title>
+    <link rel="stylesheet" href="/lib/main.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #app {
+        max-width: 920px;
+        margin: auto;
+      }
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .title > button {
+        margin-left: 10px;
+      }
+      #content {
+        padding: 20px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="loading"></div>
+    <div id="app" v-cloak>
+      <div id="content" v-if="localizationLoaded">
+        <div class="title">
+          <h2>{{ 'eula'.translate('en') }}</h2>
+          <!-- <button @click="changeLanguage">{{ language.toUpperCase() }}</button> -->
+        </div>
+        <div id="eula" v-html="content.translate()"></div>
+      </div>
+    </div>
+    <script src="/lib/main.js"></script>
+    <script>
+      TweenLite.set("#app", { perspective: 800 });
+      TweenLite.set("#content", { transformStyle: "preserve-3d" });
+      $cm("com.horidream.apps.ClipboardComposer.PrivacyPolicy", "#app", {
+        state: {
+          language: "en",
+        },
+        data() {
+          return {
+            content: "eulaDetail",
+          };
+        },
+        methods: {
+          changeLanguage() {
+            let languages = this.supportedLanguages;
+            let idx = languages.indexOf(this.language);
+            idx = ++idx % languages.length;
+            this.language = languages[idx];
+            this.fadeIn();
+          },
+          fadeIn() {
+            nextTick(() => {
+              TweenMax.set(".title", { alpha: 0, y: "-=30" });
+              TweenMax.to(".title", 1.3, {
+                alpha: 1,
+                y: 0,
+                ease: Back.easeOut,
+                delay: 0.4,
+              });
+              TweenMax.staggerFrom(
+                "#eula *",
+                0.9,
+                {
+                  x: "-=180",
+                  // scale: 1.3,
+                  // rotationY: "15deg",
+                  // transformOrigin: "top",
+                  // rotationX: "20deg",
+                  alpha: 0,
+                  ease: Cubic.easeOut,
+                },
+                0.1
+              );
+            });
+          },
+        },
+        watch: {
+          localizationLoaded(value) {
+            if (value) {
+              TweenMax.to("#loading", 0.6, { autoAlpha: 0 });
+              this.fadeIn();
+            }
+          },
+        },
+        computed: {
+          localizationLoaded() {
+            return this.localization && this.localization.cn;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
