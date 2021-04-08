@@ -45,7 +45,7 @@
     </style>
   </head>
   <body>
-    <div id="app" v-cloak>
+    <div id="app" v-cloak >
       <h2>{{ 'Copypaste+'.translate() }}</h2>
       <pre >{{ 'Edit Clipboard in Real Time'.translate() }}</pre>
       <div id="image"></div>
@@ -93,7 +93,9 @@ Compose text images`
             width: window.innerWidth,
             height: window.innerHeight
           })
-          console.log(self.size)
+        })
+        window.addEventListener("click", function(){
+          window.location = "https://apps.apple.com/cn/app/%E5%89%AA%E8%B4%B4%E6%9D%BF/id1543863305"
         })
       },
     });
