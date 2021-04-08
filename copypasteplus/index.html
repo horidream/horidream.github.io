@@ -2,24 +2,100 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="apple-itunes-app" content="app-id=1543863305">
+    <meta name="apple-itunes-app" content="app-id=1543863305" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CopyPaste+</title>
     <style>
+      [v-cloak] > * {
+        display: none;
+      }
+      * {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      #app {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        color: white;
+        text-align: center;
+      }
+      h2 {
+        margin: 20px 0;
+      }
+      p{
+        margin: 0 auto;
+        max-width: 80%;
+      }
       body {
-        background: url(./assets/title_phone.png) no-repeat center center fixed;
-        background-size: contain;
         background-color: #37a0e2;
       }
+      #image {
+        background: url(./assets/title_phone.png) no-repeat center top;
+        background-size: contain;
+        flex-grow: 1;
+      }
 
-      @media (min-aspect-ratio: 1/1) {
-        body {
-          background: url(./assets/title.png) no-repeat center center fixed;
-          background-size: contain;
-          background-color: #37a0e2;
+      @media only screen and (min-aspect-ratio: 1/1) {
+        #image {
+          background-image: url(./assets/title.png);
         }
       }
     </style>
   </head>
-  <body></body>
+  <body>
+    <div id="app" v-cloak>
+      <h2>{{ 'Copypaste+'.translate() }}</h2>
+      <pre >{{ 'Edit Clipboard in Real Time'.translate() }}</pre>
+      <div id="image"></div>
+    </div>
+  </body>
+  <script src="../lib/main.js"></script>
+  <script>
+    $cm("com.horidream.app.copypageplus.web", "#app", {
+      data() {
+        return {
+          size:{
+            width: window.innerWidth,
+            height: window.innerHeight
+          },
+          localization: {
+            cn: {
+              "Copypaste+": "剪贴板+",
+              "Edit Clipboard in Real Time":
+`
+实时编辑、创建、删除剪贴板内容
+iCloud、本地、文件三种备份方式
+朗读文本、转换文本为图片
+为文字添加场景背景
+存储内容加解密
+合成文字图片
+`,
+            },
+            en:{
+              "Edit Clipboard in Real Time":
+`Edit, create or delete clipboard in real time
+Three backup methods: iCloud, local or file
+Read text aloud, convert text to image 
+Encrypt and decrypt stored content 
+Add scene background to text
+Compose text images`
+            }
+          },
+        };
+      },
+      mounted() {
+        this.state.language = window.navigator.language == "zh" ? "cn" : "en";
+        var self = this;
+        window.addEventListener("resize", function(){
+          Object.assign(self.size, {
+            width: window.innerWidth,
+            height: window.innerHeight
+          })
+          console.log(self.size)
+        })
+      },
+    });
+  </script>
 </html>
