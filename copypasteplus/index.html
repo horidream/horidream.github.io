@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="apple-itunes-app" content="app-id=1543863305" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CopyPaste+</title>
+    <title>ClipboardComposer</title>
     <style>
       [v-cloak] > * {
         display: none;
@@ -56,7 +56,7 @@
   </head>
   <body>
     <div id="app" v-cloak >
-      <h2>{{ 'Copypaste+'.translate() }} <button @click="changeLanguage">{{ language.toUpperCase() }}</button></h2>
+      <h2>{{ 'ClipboardComposer'.translate() }} <button @click="changeLanguage">{{ language.toUpperCase() }}</button></h2>
       <pre >{{ 'Edit Clipboard in Real Time'.translate() }}</pre>
       <div id="image"></div>
     </div>
@@ -72,7 +72,7 @@
           },
           localization: {
             cn: {
-              "Copypaste+": "剪贴板+",
+              "ClipboardComposer": "剪贴板+",
               "Edit Clipboard in Real Time":
 `
 实时编辑、创建、删除剪贴板内容
@@ -84,6 +84,7 @@ iCloud、本地、文件三种备份方式
 `,
             },
             en:{
+              "ClipboardComposer": "Clipboard Composer",
               "Edit Clipboard in Real Time":
 `Edit, create or delete clipboard in real time
 Three backup methods: iCloud, local or file
