@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display ID Value</title>
+</head>
+<body>
+    <!-- Add a div or span where the value will be displayed -->
+    <h1>Query Parameter Value</h1>
+    <p>Your ID is: <span id="display-id">N/A</span></p>
+
+    <!-- Include a script to extract and display the value -->
+    <script>
+        // Get the URL query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Extract the 'id' parameter value
+        const idValue = urlParams.get('id');
+
+        // Display the 'id' value in the HTML element with ID 'display-id'
+        document.getElementById('display-id').textContent = idValue ? idValue : 'Not Provided';
+    </script>
+</body>
+</html>
